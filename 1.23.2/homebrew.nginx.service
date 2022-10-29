@@ -1,0 +1,10 @@
+[Unit]
+Description=Homebrew generated unit for nginx
+
+[Install]
+WantedBy=default.target
+
+[Service]
+Type=simple
+ExecStart=/opt/homebrew/opt/nginx/bin/nginx -g daemon off;
+WorkingDirectory=/opt/homebrew
