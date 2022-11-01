@@ -7,8 +7,8 @@ function random(cantidad) {
 }
   
 process.on("message", (msg,cant) => {
-    if (msg == "start") {
-        const numRand = random(cant);
+    if (msg[0] == "start") {
+        const numRand = random(msg[1]);
         process.send(numRand);
     }
 });

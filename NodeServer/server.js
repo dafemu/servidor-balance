@@ -109,9 +109,10 @@ app.get("/info", function (req, res) {
 
 app.post("/api/randoms ", function (req, res) {
   const cantidad = req.params.cant;
+
   const child = fork("./random.js");
-  child.send("start");
-  child.send(cantidad);
+
+  child.send(["start", cantidad]); 
   child.on("message", (numRand) => {
     console.log(`port: ${PORT} -> Fyh: ${Date.now()}`);
     const info = {
