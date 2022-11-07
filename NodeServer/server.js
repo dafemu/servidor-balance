@@ -108,23 +108,17 @@ app.get("/info", function (req, res) {
 });
 
 app.post("/api/randoms ", function (req, res) {
-  const cantidad = req.params.cant;
+  let cantidad = req.query.cant;
+  (cantidad) ? cantidad : cantidad = 1000000;
 
-  const child = fork("./random.js");
+  const forked = fork("./random.js");
 
-  child.send(["start", cantidad]); 
-  child.on("message", (numRand) => {
-    console.log(`port: ${PORT} -> Fyh: ${Date.now()}`);
-    const info = {
-      puerto: PORT,
-      num_random: numRand,
-      procesadores: numCPUS,
+  forked.on('message', msg => {
+    if (msg == 'listo') {
+      forked.send(cantidad);
+    } else {
+      res.send(msg);
     }
-    res.send(info);
-    // res.send(`La numero Random es ${numRand}`);
-  });
-
-    
 });
 
 app.get("/login", (req, res) => {
@@ -182,7 +176,7 @@ app.get("/logout", (req, res) => {
 });
 
 /*============================[Servidor]============================*/
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
   console.log(`Servidor escuchando en puerto ${PORT}`);
 });
