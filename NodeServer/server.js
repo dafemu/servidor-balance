@@ -119,6 +119,7 @@ app.post("/api/randoms ", function (req, res) {
     } else {
       res.send(msg);
     }
+  });
 });
 
 app.get("/login", (req, res) => {
@@ -176,10 +177,11 @@ app.get("/logout", (req, res) => {
 });
 
 /*============================[Servidor]============================*/
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, () => {
   console.log(`Servidor escuchando en puerto ${PORT}`);
 });
+
 server.on("error", (error) => {
   console.error(`Error en el servidor ${error}`);
 });
