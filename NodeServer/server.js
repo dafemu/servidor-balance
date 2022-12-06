@@ -177,7 +177,10 @@ app.get("/logout", (req, res) => {
 });
 
 /*============================[Servidor]============================*/
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
+// const PORT = parseInt(process.argv[2]) || 8080;
+const PORT = valueMinimist || 8080;
+
 const server = app.listen(PORT, () => {
   console.log(`Servidor escuchando en puerto ${PORT}`);
 });
